@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,20 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMediaApp">
         <activity
-            android:name=".RegistrationActivity"/>
+            android:name=".PostDetailsActivity"
+            android:exported="false" />
         <activity
-            android:name=".DashboardActivity"/>
-        <activity
-            android:name=".LoginActivity"/>
+            android:name=".PostLikedByActivity"
+            android:exported="false" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".LoginActivity" />
         <activity
             android:name=".SplashScreen"
-            android:exported = "true">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".EditProfilePage" />
     </application>
 
 </manifest>
