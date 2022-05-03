@@ -86,12 +86,12 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
         //calendar.setTimeInMillis(Long.parseLong(ptime));
         String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
-        holder.name.setText(nameh);
         holder.title.setText(titlee);
         holder.description.setText(descri);
         holder.time.setText(getDate(ptime));
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
+        holder.email.setText(email);
         //setLikes(holder, ptime);
         try {
             Glide.with(context).load(dp).into(holder.picture);
@@ -224,16 +224,14 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
 
     class MyHolder extends RecyclerView.ViewHolder {
         ImageView picture, image;
-        TextView name, time, title, description, like, comments;
+        TextView time, title, description, like, comments, email;
         ImageButton more;
         Button likebtn, comment;
         LinearLayout profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            picture = itemView.findViewById(R.id.picturetv);
             image = itemView.findViewById(R.id.pimagetv);
-            name = itemView.findViewById(R.id.unametv);
             time = itemView.findViewById(R.id.utimetv);
             more = itemView.findViewById(R.id.morebtn);
             title = itemView.findViewById(R.id.ptitletv);
@@ -243,6 +241,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
             likebtn = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
             profile = itemView.findViewById(R.id.profilelayout);
+            email = itemView.findViewById(R.id.uemail);
         }
     }
 }

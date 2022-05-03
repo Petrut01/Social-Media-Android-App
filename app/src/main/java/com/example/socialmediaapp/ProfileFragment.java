@@ -58,7 +58,6 @@ public class ProfileFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference("Users");
 
         // Initialising the text view and imageview
-        avatartv = view.findViewById(R.id.avatartv);
         nam = view.findViewById(R.id.nametv);
         email = view.findViewById(R.id.emailtv);
         fab = view.findViewById(R.id.fab);
