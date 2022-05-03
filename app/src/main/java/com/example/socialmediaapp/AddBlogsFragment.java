@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,6 +43,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.UUID;
 
 
 /**
@@ -266,53 +268,37 @@ public class AddBlogsFragment extends Fragment {
         byte[] data = byteArrayOutputStream.toByteArray();
 
         // initialising the storage reference for updating the data
-        StorageReference storageReference1 = FirebaseStorage.getInstance().getReference().child(filepathname);
-        storageReference1.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // getting the url of image uploaded
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful()) ;
-                String downloadUri = uriTask.getResult().toString();
-                if (uriTask.isSuccessful()) {
-                    // if task is successful the update the data into firebase
-                    HashMap<Object, String> hashMap = new HashMap<>();
-                    hashMap.put("uid", uid);
-                    hashMap.put("uname", name);
-                    hashMap.put("uemail", email);
-                    hashMap.put("udp", dp);
-                    hashMap.put("title", titl);
-                    hashMap.put("description", description);
-                    hashMap.put("uimage", downloadUri);
-                    hashMap.put("ptime", timestamp);
-                    hashMap.put("plike", "0");
-                    hashMap.put("pcomments", "0");
+        //String pid = UUID.randomUUID().toString();
 
-                    // set the data into firebase and then empty the title ,description and image data
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("/Posts");
-                    databaseReference.child(timestamp).setValue(hashMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    pd.dismiss();
-                                    Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
-                                    title.setText("");
-                                    des.setText("");
-                                    image.setImageURI(null);
-                                    imageuri = null;
-                                    startActivity(new Intent(getContext(), DashboardActivity.class));
-                                    getActivity().finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        HashMap<Object, String> hashMap = new HashMap<>();
+        hashMap.put("uid", user.getUid());
+        hashMap.put("uemail", user.getEmail());
+        hashMap.put("title", titl);
+        hashMap.put("description", description);
+        //hashMap.put("uimage", downloadUri);
+        hashMap.put("ptime", timestamp);
+        hashMap.put("plike", "0");
+        hashMap.put("pcomments", "0");
+        //hashMap.put("pid", pid);
+
+        // set the data into firebase and then empty the title ,description and image data
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("Posts");
+        reference.child(timestamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        pd.dismiss();
+                        Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
+                        title.setText("");
+                        des.setText("");
+                        image.setImageURI(null);
+                        imageuri = null;
+                        startActivity(new Intent(getContext(), DashboardActivity.class));
+                        getActivity().finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 pd.dismiss();
@@ -320,6 +306,7 @@ public class AddBlogsFragment extends Fragment {
             }
         });
     }
+
 
     // Here we are getting data from image
     @Override
