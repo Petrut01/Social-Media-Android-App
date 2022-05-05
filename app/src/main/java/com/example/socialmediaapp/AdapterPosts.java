@@ -177,12 +177,13 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
 
-                            ModelPost data = dataSnapshot.getValue(ModelPost.class);
-                            shareIntent.setType("text/plain");
-                            shareIntent.setAction(Intent.ACTION_SEND);
-                            shareIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(data));
-                            context.startActivity(shareIntent);
-
+                            for( DataSnapshot dataSnapshot1: dataSnapshot.getChildren()) {
+                                ModelPost data = dataSnapshot1.getValue(ModelPost.class);
+                                shareIntent.setType("text/plain");
+                                shareIntent.setAction(Intent.ACTION_SEND);
+                                shareIntent.putExtra(Intent.EXTRA_TEXT, "Descriere: " + data.description);
+                                context.startActivity(shareIntent);
+                            }
                         }
 
                         @Override
