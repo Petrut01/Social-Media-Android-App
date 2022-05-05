@@ -1,5 +1,6 @@
 package com.example.socialmediaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -66,6 +67,7 @@ public class DashboardActivity extends AppCompatActivity {
                     fragmentTransaction4.replace(R.id.content, fragment4, "");
                     fragmentTransaction4.commit();
                     return true;
+
             }
             return false;
         }

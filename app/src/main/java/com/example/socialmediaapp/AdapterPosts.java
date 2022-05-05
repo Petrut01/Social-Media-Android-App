@@ -161,12 +161,36 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
         if (uid.equals(myuid)) {
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
+            popupMenu.getMenu().add(Menu.NONE, 1, 1, "SHARE");
         }
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == 0) {
                     deltewithImage(pid);
+                }
+                if (item.getItemId() == 1) {
+                    Intent shareIntent = new Intent();
+                    Query query = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("ptime").equalTo(pid);
+
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            ModelPost data = dataSnapshot.getValue(ModelPost.class);
+                            shareIntent.setType("text/plain");
+                            shareIntent.setAction(Intent.ACTION_SEND);
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(data));
+                            context.startActivity(shareIntent);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }
 
                 return false;
