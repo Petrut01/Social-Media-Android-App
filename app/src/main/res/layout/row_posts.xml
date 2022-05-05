@@ -23,13 +23,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/picturetv"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/profile_image" />
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -37,20 +30,21 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/unametv"
+                    android:id="@+id/uemail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Name"
                     android:textColor="@color/colorBlack"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/utimetv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="33 min" />
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/utimetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="33 min" />
 
             <ImageButton
                 android:id="@+id/morebtn"
@@ -67,7 +61,9 @@
             android:layout_height="wrap_content"
             android:text="Title"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="5px"/>
 
         <TextView
             android:id="@+id/descript"

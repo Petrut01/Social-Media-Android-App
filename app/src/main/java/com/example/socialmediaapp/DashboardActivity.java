@@ -59,22 +59,6 @@ public class DashboardActivity extends AppCompatActivity {
                     fragmentTransaction1.commit();
                     return true;
 
-                case R.id.nav_users:
-                    actionBar.setTitle("Users");
-                    UsersFragment fragment2 = new UsersFragment();
-                    FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction2.replace(R.id.content, fragment2, "");
-                    fragmentTransaction2.commit();
-                    return true;
-
-                case R.id.nav_chat:
-                    actionBar.setTitle("Chats");
-                    ChatListFragment listFragment = new ChatListFragment();
-                    FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction3.replace(R.id.content, listFragment, "");
-                    fragmentTransaction3.commit();
-                    return true;
-
                 case R.id.nav_addblogs:
                     actionBar.setTitle("Add Blogs");
                     AddBlogsFragment fragment4 = new AddBlogsFragment();

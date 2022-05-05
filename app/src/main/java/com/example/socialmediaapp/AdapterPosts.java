@@ -1,5 +1,6 @@
 package com.example.socialmediaapp;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -62,8 +63,15 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         return new MyHolder(view);
     }
 
+    private String getDate(String time) {
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(Long.parseLong(time));
+        String date = DateFormat.format("dd-MM-yyyy", cal).toString();
+        return date;
+    }
+
     @Override
-    public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, @SuppressLint("RecyclerView") final int position) {
         final String uid = modelPosts.get(position).getUid();
         String nameh = modelPosts.get(position).getUname();
         final String titlee = modelPosts.get(position).getTitle();
@@ -76,15 +84,15 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         String comm = modelPosts.get(position).getPcomments();
         final String pid = modelPosts.get(position).getPtime();
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        calendar.setTimeInMillis(Long.parseLong(ptime));
+        //calendar.setTimeInMillis(Long.parseLong(ptime));
         String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
-        holder.name.setText(nameh);
         holder.title.setText(titlee);
         holder.description.setText(descri);
-        holder.time.setText(timedate);
+        holder.time.setText(getDate(ptime));
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
-        setLikes(holder, ptime);
+        holder.email.setText(email);
+        //setLikes(holder, ptime);
         try {
             Glide.with(context).load(dp).into(holder.picture);
         } catch (Exception e) {
@@ -158,7 +166,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == 0) {
-                    deltewithImage(pid, image);
+                    deltewithImage(pid);
                 }
 
                 return false;
@@ -167,35 +175,26 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         popupMenu.show();
     }
 
-    private void deltewithImage(final String pid, String image) {
+    private void deltewithImage(final String pid) {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Deleting");
-        StorageReference picref = FirebaseStorage.getInstance().getReferenceFromUrl(image);
-        picref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        Query query = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("ptime").equalTo(pid);
+        query.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Void aVoid) {
-                Query query = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("ptime").equalTo(pid);
-                query.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                            dataSnapshot1.getRef().removeValue();
-                        }
-                        pd.dismiss();
-                        Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_LONG).show();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    dataSnapshot1.getRef().removeValue();
+                }
+                pd.dismiss();
+                Toast.makeText(context, "Deleted Successfully", Toast.LENGTH_LONG).show();
             }
-        }).addOnFailureListener(new OnFailureListener() {
+
             @Override
-            public void onFailure(@NonNull Exception e) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
     }
 
     private void setLikes(final MyHolder holder, final String pid) {
@@ -225,16 +224,14 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
 
     class MyHolder extends RecyclerView.ViewHolder {
         ImageView picture, image;
-        TextView name, time, title, description, like, comments;
+        TextView time, title, description, like, comments, email;
         ImageButton more;
         Button likebtn, comment;
         LinearLayout profile;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            picture = itemView.findViewById(R.id.picturetv);
             image = itemView.findViewById(R.id.pimagetv);
-            name = itemView.findViewById(R.id.unametv);
             time = itemView.findViewById(R.id.utimetv);
             more = itemView.findViewById(R.id.morebtn);
             title = itemView.findViewById(R.id.ptitletv);
@@ -244,6 +241,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
             likebtn = itemView.findViewById(R.id.like);
             comment = itemView.findViewById(R.id.comment);
             profile = itemView.findViewById(R.id.profilelayout);
+            email = itemView.findViewById(R.id.uemail);
         }
     }
 }
