@@ -2,14 +2,20 @@ package com.example.socialmediaapp;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -21,8 +27,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.IntegerRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -50,6 +59,8 @@ import java.util.UUID;
  * A simple {@link Fragment} subclass.
  */
 public class AddBlogsFragment extends Fragment {
+
+    private static final String CHANNEL_ID = "1";
 
     public AddBlogsFragment() {
         // Required empty public constructor
@@ -131,6 +142,40 @@ public class AddBlogsFragment extends Fragment {
         });
         return view;
     }
+//    private void createNotificationChannel() {
+//        // Create the NotificationChannel, but only on API 26+ because
+//        // the NotificationChannel class is new and not in the support library
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            CharSequence name = getString(R.string.channel_name);
+//            String description = getString(R.string.channel_description);
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+//            channel.setDescription(description);
+//            // Register the channel with the system; you can't change the importance
+//            // or other notification behaviors after this
+//            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//    }
+    public void show_Notification(String email, String title) {
+
+        Intent intent = new Intent(getContext(), AddBlogsFragment.class);
+        String CHANNEL_ID = "MYCHANNEL";
+        NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, "name", NotificationManager.IMPORTANCE_LOW);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 1, intent, PendingIntent.FLAG_IMMUTABLE);
+        Notification notification = new Notification.Builder(getContext(), CHANNEL_ID)
+                .setContentTitle("New post from " + email)
+                .setContentText(title)
+                .setContentIntent(pendingIntent)
+                .setChannelId(CHANNEL_ID)
+                .setSmallIcon(android.R.drawable.sym_action_chat)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(notificationChannel);
+        notificationManager.notify(1, notification);
+
+    }
 
     // Upload the value of blog data into firebase
     private void uploadData(final String titl, final String description) {
@@ -168,10 +213,13 @@ public class AddBlogsFragment extends Fragment {
                     public void onSuccess(Void aVoid) {
                         pd.dismiss();
                         Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
+                        show_Notification(user.getEmail(), title.getText().toString());
+
                         title.setText("");
                         des.setText("");
                         startActivity(new Intent(getContext(), DashboardActivity.class));
                         getActivity().finish();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
