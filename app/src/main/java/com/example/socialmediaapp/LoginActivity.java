@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        // initialising the layout items
         email = findViewById(R.id.login_email);
         password = findViewById(R.id.login_password);
         newdnewaccount = findViewById(R.id.needs_new_account);
@@ -57,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 
-        // checking if user is null or not
         if (mAuth != null) {
             currentUser = mAuth.getCurrentUser();
         }
@@ -79,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // If new account then move to Registration Activity
         newdnewaccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Recover Your Password using email
         reocverpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +124,6 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar.setCanceledOnTouchOutside(false);
         loadingBar.show();
 
-        // send reset password email
         mAuth.sendPasswordResetEmail(emaill).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -152,7 +147,6 @@ public class LoginActivity extends AppCompatActivity {
         loadingBar.setMessage("Logging In....");
         loadingBar.show();
 
-        // sign in with email and password after authenticating
         mAuth.signInWithEmailAndPassword(emaill, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -176,10 +170,8 @@ public class LoginActivity extends AppCompatActivity {
                         hashMap.put("cover", "");
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-                        // store the value in Database in "Users" Node
                         DatabaseReference reference = database.getReference("Users");
 
-                        // storing the value in Firebase
                         reference.child(uid).setValue(hashMap);
                     }
                     Toast.makeText(LoginActivity.this, "Registered User " + user.getEmail(), Toast.LENGTH_LONG).show();

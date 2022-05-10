@@ -35,18 +35,12 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
-    String myuid;
     RecyclerView recyclerView;
     List<ModelPost> posts;
     AdapterPosts adapterPosts;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         firebaseAuth = FirebaseAuth.getInstance();
         recyclerView = view.findViewById(R.id.postrecyclerview);

@@ -16,8 +16,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class DashboardActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    FirebaseUser firebaseUser;
-    String myuid;
     ActionBar actionBar;
     BottomNavigationView navigationView;
 
@@ -61,7 +59,7 @@ public class DashboardActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_addblogs:
-                    actionBar.setTitle("Add Blogs");
+                    actionBar.setTitle("Add Posts");
                     AddBlogsFragment fragment4 = new AddBlogsFragment();
                     FragmentTransaction fragmentTransaction4 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction4.replace(R.id.content, fragment4, "");

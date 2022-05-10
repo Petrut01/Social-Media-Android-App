@@ -85,7 +85,6 @@ public class AddBlogsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         firebaseAuth = FirebaseAuth.getInstance();
         View view = inflater.inflate(R.layout.fragment_add_blogs, container, false);
 
@@ -96,7 +95,6 @@ public class AddBlogsFragment extends Fragment {
         pd.setCanceledOnTouchOutside(false);
         Intent intent = getActivity().getIntent();
 
-        // Retrieving the user data like name ,email and profile pic using query
         databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         Query query = databaseReference.orderByChild("email").equalTo(email);
         query.addValueEventListener(new ValueEventListener() {
@@ -115,22 +113,18 @@ public class AddBlogsFragment extends Fragment {
             }
         });
 
-
-        // Now we will upload out blog
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String titl = "" + title.getText().toString().trim();
                 String description = "" + des.getText().toString().trim();
 
-                // If empty set error
                 if (TextUtils.isEmpty(titl)) {
                     title.setError("Title Cant be empty");
                     Toast.makeText(getContext(), "Title can't be left empty", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                // If empty set error
                 if (TextUtils.isEmpty(description)) {
                     des.setError("Description Cant be empty");
                     Toast.makeText(getContext(), "Description can't be left empty", Toast.LENGTH_LONG).show();
@@ -142,21 +136,6 @@ public class AddBlogsFragment extends Fragment {
         });
         return view;
     }
-//    private void createNotificationChannel() {
-//        // Create the NotificationChannel, but only on API 26+ because
-//        // the NotificationChannel class is new and not in the support library
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            CharSequence name = getString(R.string.channel_name);
-//            String description = getString(R.string.channel_description);
-//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-//            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-//            channel.setDescription(description);
-//            // Register the channel with the system; you can't change the importance
-//            // or other notification behaviors after this
-//            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//    }
     public void show_Notification(String email, String title) {
 
         Intent intent = new Intent(getContext(), AddBlogsFragment.class);
@@ -177,34 +156,21 @@ public class AddBlogsFragment extends Fragment {
 
     }
 
-    // Upload the value of blog data into firebase
     private void uploadData(final String titl, final String description) {
-        // show the progress dialog box
         pd.setMessage("Publishing Post");
         pd.show();
         final String timestamp = String.valueOf(System.currentTimeMillis());
-        String filepathname = "Posts/" + "post" + timestamp;
-//        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] data = byteArrayOutputStream.toByteArray();
-
-        // initialising the storage reference for updating the data
-        //String pid = UUID.randomUUID().toString();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         HashMap<Object, String> hashMap = new HashMap<>();
         hashMap.put("uid", user.getUid());
         hashMap.put("uemail", user.getEmail());
         hashMap.put("title", titl);
         hashMap.put("description", description);
-        //hashMap.put("uimage", downloadUri);
         hashMap.put("ptime", timestamp);
         hashMap.put("plike", "0");
         hashMap.put("pcomments", "0");
-        //hashMap.put("pid", pid);
 
-        // set the data into firebase and then empty the title ,description and image data
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("Posts");
         reference.child(timestamp).setValue(hashMap)
@@ -214,7 +180,6 @@ public class AddBlogsFragment extends Fragment {
                         pd.dismiss();
                         Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
                         show_Notification(user.getEmail(), title.getText().toString());
-
                         title.setText("");
                         des.setText("");
                         startActivity(new Intent(getContext(), DashboardActivity.class));

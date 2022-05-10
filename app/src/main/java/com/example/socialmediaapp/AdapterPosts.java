@@ -73,7 +73,6 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, @SuppressLint("RecyclerView") final int position) {
         final String uid = modelPosts.get(position).getUid();
-        String nameh = modelPosts.get(position).getUname();
         final String titlee = modelPosts.get(position).getTitle();
         final String descri = modelPosts.get(position).getDescription();
         final String ptime = modelPosts.get(position).getPtime();
@@ -84,15 +83,12 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         String comm = modelPosts.get(position).getPcomments();
         final String pid = modelPosts.get(position).getPtime();
         Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        //calendar.setTimeInMillis(Long.parseLong(ptime));
-        String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
         holder.title.setText(titlee);
         holder.description.setText(descri);
         holder.time.setText(getDate(ptime));
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
         holder.email.setText(email);
-        //setLikes(holder, ptime);
         try {
             Glide.with(context).load(dp).into(holder.picture);
         } catch (Exception e) {
