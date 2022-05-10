@@ -7,32 +7,13 @@
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/buttonss.xml" value="0.226" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/edit.xml" value="0.226" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_account.xml" value="0.226" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_add.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_chat.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_comment.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_email.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_images.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_like.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_liked.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_more.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_search.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_share.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/ic_users.xml" value="0.183" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/name.xml" value="0.183" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/drawable/notification_icon.xml" value="0.226" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_dashboard.xml" value="0.14492753623188406" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_edit_profile_page.xml" value="0.1" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_edit_profile_page2.xml" value="0.1" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_main.xml" value="0.17831813576494426" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_post_details.xml" value="0.17831813576494426" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_post_liked_by.xml" value="0.17831813576494426" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_registration.xml" value="0.14492753623188406" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/activity_splash_screen.xml" value="0.14492753623188406" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/dialog_update_password.xml" value="0.1" />
-        <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/fragment_add_blogs.xml" value="0.14492753623188406" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/ANUL III/SEM II/Android/proiect/Social-Media-Android-App/app/src/main/res/layout/fragment_users.xml" value="0.17831813576494426" />
@@ -46,9 +27,11 @@
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/drawable/ic_email.xml" value="0.18" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/drawable/ic_home.xml" value="0.18" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18" />
+        <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/drawable/ic_users.xml" value="0.197" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_dashboard.xml" value="0.17135416666666667" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_post_liked_by.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_registration.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/activity_splash_screen.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/Petrut/Documents/GitHub/Social-Media-Android-App/app/src/main/res/layout/fragment_add_blogs.xml" value="0.12545289855072464" />

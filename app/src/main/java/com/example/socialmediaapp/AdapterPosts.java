@@ -43,14 +43,14 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
 
     Context context;
     String myuid;
-    private DatabaseReference liekeref, postref;
+    private DatabaseReference likeref, postref;
     boolean mprocesslike = false;
 
     public AdapterPosts(Context context, List<ModelPost> modelPosts) {
         this.context = context;
         this.modelPosts = modelPosts;
         myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
+        likeref = FirebaseDatabase.getInstance().getReference().child("Likes");
         postref = FirebaseDatabase.getInstance().getReference().child("Posts");
     }
 
@@ -114,17 +114,17 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
                 final int plike = Integer.parseInt(modelPosts.get(position).getPlike());
                 mprocesslike = true;
                 final String postid = modelPosts.get(position).getPtime();
-                liekeref.addValueEventListener(new ValueEventListener() {
+                likeref.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (mprocesslike) {
                             if (dataSnapshot.child(postid).hasChild(myuid)) {
                                 postref.child(postid).child("plike").setValue("" + (plike - 1));
-                                liekeref.child(postid).child(myuid).removeValue();
+                                likeref.child(postid).child(myuid).removeValue();
                                 mprocesslike = false;
                             } else {
                                 postref.child(postid).child("plike").setValue("" + (plike + 1));
-                                liekeref.child(postid).child(myuid).setValue("Liked");
+                                likeref.child(postid).child(myuid).setValue("Liked");
                                 mprocesslike = false;
                             }
                         }
@@ -163,7 +163,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == 0) {
-                    deltewithImage(pid);
+                    deletePost(pid);
                 }
                 if (item.getItemId() == 1) {
                     Intent shareIntent = new Intent();
@@ -196,7 +196,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
         popupMenu.show();
     }
 
-    private void deltewithImage(final String pid) {
+    private void deletePost(final String pid) {
         final ProgressDialog pd = new ProgressDialog(context);
         pd.setMessage("Deleting");
         Query query = FirebaseDatabase.getInstance().getReference("Posts").orderByChild("ptime").equalTo(pid);
@@ -219,7 +219,7 @@ public class AdapterPosts extends RecyclerView.Adapter<com.example.socialmediaap
     }
 
     private void setLikes(final MyHolder holder, final String pid) {
-        liekeref.addValueEventListener(new ValueEventListener() {
+        likeref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(pid).hasChild(myuid)) {

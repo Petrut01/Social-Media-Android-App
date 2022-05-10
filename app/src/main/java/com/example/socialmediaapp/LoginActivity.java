@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 loadingBar.dismiss();
-                Toast.makeText(LoginActivity.this, "Error Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
             }
         });
     }

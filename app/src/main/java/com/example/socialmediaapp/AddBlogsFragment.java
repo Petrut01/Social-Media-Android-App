@@ -68,17 +68,14 @@ public class AddBlogsFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     EditText title, des;
-    private static final int CAMERA_REQUEST = 100;
+
     private static final int STORAGE_REQUEST = 200;
-    String cameraPermission[];
+
     String storagePermission[];
     ProgressDialog pd;
-    ImageView image;
-    String edititle, editdes, editimage;
-    private static final int IMAGEPICK_GALLERY_REQUEST = 300;
-    private static final int IMAGE_PICKCAMERA_REQUEST = 400;
 
-    Uri imageuri = null;
+    String edititle, editdes, editimage;
+
     String name, email, uid, dp;
     DatabaseReference databaseReference;
     Button upload;
